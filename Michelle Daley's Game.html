@@ -1,11 +1,12 @@
+
 <!DOCTYPE html>
-<!-- saved from url=(0047)file:///C:/Users/maristuser/Downloads/game.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<html>
+   <head>
       <title>
          Michelle Daley's Game
       </title>
    </head>
-	<body style="background-color:pink">
+	<body style = "background-color:pink">
 	<div style="text-align: center;">
 	<h1>
 		Michelle's Marist Game
@@ -18,11 +19,20 @@
 		-->
        <textarea id="display" rows="8" cols="32">0. You are in the Rotunda.</textarea>                     
        <br>
-       <input type="button" value="North" onclick="north();">
-       <input type="button" value="South" onclick="south();">
-       <input type="button" value="East" onclick="east();">
-       <input type="button" value="West" onclick="west();">
-
+       <input type="button" 
+              value="North"
+              onclick="north();">
+       <input type="button" 
+              value="South"
+              onclick="south();">
+       <input type="button" 
+              value="East"
+              onclick="east();">
+       <input type="button" 
+              value="West"
+              onclick="west();"><br>
+        <input type="text" name="command" id="command">
+        <input type="button" value="Go"  onClick="go(document.getElementById('command').value)"><br>
         <a href="mailto:mdaley.hhs@gmail.com">Send Mail</a><br>
     </div>    
         <script>
@@ -120,5 +130,5 @@
          }
                 
     </script>
-   
-</body></html>
+   </body>
+</html>
