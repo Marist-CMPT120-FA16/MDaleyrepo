@@ -32,7 +32,7 @@
               value="West"
               onclick="west();"><br>
         <input type="text" name="command" id="command">
-        <input type="button" value="Go"  onClick="go(document.getElementById('command').value)"><br>
+        <input type="button" value="Go"  onclick="interpretCommand(document.getElementById('command').value)"><br>
         <a href="mailto:mdaley.hhs@gmail.com">Send Mail</a><br>
     </div>    
         <script>
@@ -128,7 +128,40 @@
             }
             visitRoom();
          }
-                
+
+
+        function interpretCommand(direction){
+          var lastLocation = currLocation;
+          
+          //ignore case
+          direction=direction.toLowerCase();
+        
+          switch(direction){
+            
+            case('n'):
+            case('north'):
+              north();
+              break;
+              
+          
+            case('s' ):
+            case('south' ):
+              south();
+            break;
+              
+            case('e'):
+            case('east'):
+              east();
+            break;
+            
+            case('w' ):
+            case('west'):
+              west();
+            break;
+          }
+
+          document.getElementById('command').value = "";
+        }  
     </script>
    </body>
 </html>
