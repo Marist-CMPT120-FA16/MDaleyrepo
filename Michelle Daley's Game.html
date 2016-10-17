@@ -21,15 +21,19 @@
        <br>
        <input type="button" 
               value="North"
+              id="north"
               onclick="north();">
        <input type="button" 
               value="South"
+              id="south"
               onclick="south();">
        <input type="button" 
               value="East"
+              id="east"
               onclick="east();">
        <input type="button" 
               value="West"
+              id="west"
               onclick="west();"><br>
         <input type="text" name="command" id="command">
         <input type="button" value="Go"  onclick="interpretCommand(document.getElementById('command').value)"><br>
@@ -57,30 +61,50 @@
         function visitRoom() {
             var message = "";
             if (currLocation === 0) {
+              document.getElementById('north').disabled = false;
+              document.getElementById('east').disabled = false;
+              document.getElementById('south').disabled = false;
+              document.getElementById('west').disabled = false;
                message = "0. You are in the Rotunda.";
                if(visited0 === false){
                		score += 5;
                		visited0 = true;
                }
             } else if (currLocation === 1) {
+              document.getElementById('north').disabled = true;
+              document.getElementById('east').disabled = true;
+              document.getElementById('south').disabled = false;
+              document.getElementById('west').disabled = true;
                message = "1. You're at the river now.";
                 if(visited1 === false){
                		score += 5;
                		visited1 = true;
                }
             } else if (currLocation === 2) {
+              document.getElementById('north').disabled = true;
+              document.getElementById('east').disabled = true;
+              document.getElementById('south').disabled = true;
+              document.getElementById('west').disabled = false;
                message = "2. You're headed towards Giacomo's. Sure you want to stay there?";
                 if(visited2 === false){
                		score += 5;
                		visited2 = true;
                }
             } else if (currLocation === 3) {
+              document.getElementById('north').disabled = false;
+              document.getElementById('east').disabled = true;
+              document.getElementById('south').disabled = true;
+              document.getElementById('west').disabled = true;
                message = "3. You're on the way to the gym now...";
                 if(visited3 === false){
                		score += 5;
                		visited3 = true;
                }
             } else if (currLocation === 4) {
+              document.getElementById('north').disabled = true;
+              document.getElementById('east').disabled = false;
+              document.getElementById('south').disabled = true;
+              document.getElementById('west').disabled = true;
                message = "4. Hancock 005? How'd you get to class to early!";
                 if(visited4 === false){
                		score += 5;
@@ -143,7 +167,6 @@
               north();
               break;
               
-          
             case('s' ):
             case('south' ):
               south();
@@ -158,10 +181,51 @@
             case('west'):
               west();
             break;
+
+            default:
+              writeText("Lmao! You entered it wrong. Enter one of these valid commands: North, East, South, West, N, E, S, W.");   
           }
 
           document.getElementById('command').value = "";
-        }  
+        }
+
+    function disableButton(){
+      
+      // If position cannot be travelled to (array index has a value of 0) the button is disabled
+      if(map[y-1][x]!=0)
+      {
+        document.getElementById('north').disabled = false;
+      }
+      if(map[y+1][x]!=0)
+      {
+        document.getElementById('south').disabled = false;
+      }
+      if(map[y][x-1]!=0)
+      {
+        document.getElementById('west').disabled = false;
+      }
+      if(map[y][x+1]!=0)
+      {
+        document.getElementById('east').disabled = false;
+      }
+      //I position is available the enable the button
+      if(map[y-1][x]===0)
+      {
+        document.getElementById('north').disabled = true;
+      }
+      if(map[y+1][x]===0)
+      {
+        document.getElementById('south').disabled = true;
+      }
+      if(map[y][x-1]===0)
+      {
+        document.getElementById('west').disabled = true;
+      }
+      if(map[y][x+1]===0)
+      {
+        document.getElementById('east').disabled = true;
+      }
+    }  
     </script>
    </body>
 </html>
