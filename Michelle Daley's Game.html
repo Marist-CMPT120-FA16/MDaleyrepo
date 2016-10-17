@@ -13,8 +13,8 @@
 	</h1>
 		<!---
 			Michelle (Mitch) Daley
-			October 2, 2016
-			Project/Assignment 2
+			October 15, 2016
+			Project/Assignment 3
 			Anthony Giorgio's Intro to Prog.
 		-->
        <textarea id="display" rows="8" cols="32">0. You are in the Rotunda.</textarea>                     
@@ -103,12 +103,22 @@
             } else if (currLocation === 4) {
               document.getElementById('north').disabled = true;
               document.getElementById('east').disabled = false;
-              document.getElementById('south').disabled = true;
+              document.getElementById('south').disabled = false;
               document.getElementById('west').disabled = true;
                message = "4. Hancock 005? How'd you get to class to early!";
                 if(visited4 === false){
                		score += 5;
                		visited4 = true;
+               }
+            } else if (currLocation === 5) {
+              document.getElementById('north').disabled = false;
+              document.getElementById('east').disabled = false;
+              document.getElementById('south').disabled = true;
+              document.getElementById('west').disabled = true;
+               message = "5. You're drowning in the river. Get out quick!";
+                if(visited4 === false){
+                  score += 5;
+                  visited4 = true;
                }
             } 
             writeText(message);
@@ -122,6 +132,9 @@
             else if (currLocation === 3){
                  currLocation = 0;
             }
+            else if (currLocation === 5){
+                 currLocation = 4;
+            }
             visitRoom();
          }
 
@@ -132,6 +145,9 @@
             else if (currLocation === 0) {
                  currLocation = 3;
             }
+            else if (currLocation === 4) {
+                 currLocation = 5;
+            }            
             visitRoom();
          }
 
@@ -141,6 +157,9 @@
             } else if (currLocation === 0) {
                  currLocation = 2;
             }
+            else if (currLocation === 5){
+                 currLocation = 1;
+            }
             visitRoom();
          }
 
@@ -149,6 +168,8 @@
                currLocation = 0;
             } else if (currLocation === 0) {
                  currLocation = 4;
+            } else if (currLocation === 1) {
+                 currLocation = 5;
             }
             visitRoom();
          }
@@ -188,44 +209,6 @@
 
           document.getElementById('command').value = "";
         }
-
-    function disableButton(){
-      
-      // If position cannot be travelled to (array index has a value of 0) the button is disabled
-      if(map[y-1][x]!=0)
-      {
-        document.getElementById('north').disabled = false;
-      }
-      if(map[y+1][x]!=0)
-      {
-        document.getElementById('south').disabled = false;
-      }
-      if(map[y][x-1]!=0)
-      {
-        document.getElementById('west').disabled = false;
-      }
-      if(map[y][x+1]!=0)
-      {
-        document.getElementById('east').disabled = false;
-      }
-      //I position is available the enable the button
-      if(map[y-1][x]===0)
-      {
-        document.getElementById('north').disabled = true;
-      }
-      if(map[y+1][x]===0)
-      {
-        document.getElementById('south').disabled = true;
-      }
-      if(map[y][x-1]===0)
-      {
-        document.getElementById('west').disabled = true;
-      }
-      if(map[y][x+1]===0)
-      {
-        document.getElementById('east').disabled = true;
-      }
-    }  
     </script>
    </body>
 </html>
