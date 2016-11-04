@@ -8,6 +8,7 @@
    </head>
 	<body style = "background-color:pink">
 	<div style="text-align: center;">
+  <script type="text/javascript" src="utilities.js"></script>
 	<h1>
 		Michelle's Marist Game
 	</h1>
@@ -17,24 +18,24 @@
 			Project/Assignment 3
 			Anthony Giorgio's Intro to Prog.
 		-->
-       <textarea id="display" rows="8" cols="32">0. You are in the Rotunda.</textarea>                     
+       <textarea id="display" rows="8" cols="32"></textarea>                     
        <br>
        <input type="button" 
               value="North"
               id="north"
-              onclick="north();">
+              onclick="north()">
        <input type="button" 
               value="South"
               id="south"
-              onclick="south();">
+              onclick="south()">
        <input type="button" 
               value="East"
               id="east"
-              onclick="east();">
+              onclick="east()">
        <input type="button" 
               value="West"
               id="west"
-              onclick="west();"><br>
+              onclick="west()"><br>
         <input type="text" name="command" id="command">
         <input type="button" value="Go"  onclick="interpretCommand(document.getElementById('command').value)"><br>
         <a href="mailto:mdaley.hhs@gmail.com">Send Mail</a><br>
@@ -45,6 +46,8 @@
 
          //Score and starting score
          var score = 0;
+
+         visitRoom();
 
         function interpretCommand(direction){
           var lastLocation = currLocation;
@@ -72,6 +75,11 @@
             case('w' ):
             case('west'):
               west();
+            break;
+
+            case('t' ):
+            case('take'):
+              take();
             break;
 
             default:
