@@ -31,16 +31,16 @@ var gollum = new item(5, "Gollum", "How can you be sure he'll be true to you?");
 var smallKnife = new item(6, "Small Knife", "For anyone that gets in your way from now on...");
 var friends = new item(7, "Friends", "Alas Reunited with your loved ones!");
 //locations
-var theShire = new location(0, "The Shire", "5. Frodo- you must leave the shire immediately... The Black Riders are following close behind!","5. You must not wear the ring or they will see you!", ring);
-var weathertop = new location(1, "Weathertop", "A Black Rider has followed you! Don't put on the ring!","They sense that you're wearing the ring!", mithrilArmor);
-var rivendale = new location(2, "Rivendale", "The Council of Elrond is meeting, go! Discuss your future.","At least Bilbo understands...", stingSword);
-var minesMoria = new location(3, "Mines of Moria", "Doors of During: Speal friend, and enter."," Are you sure you want to enter this treacherous tomb?", orcsFinger);
-var lothlorien = new location(4, "Elven Kingdom of Lothlorien","Ah! I think Lady Galadriel has a few gifts for you.","Can you speak Elvish? Are you sur eyo're worth of these gifts?", lembasBread);
+var theShire = new location(0, "The Shire", " Frodo- you must leave the shire immediately... The Black Riders are following close behind! Take The Ring on the table."," Frodo- you must leave the shire immediately... The Black Riders are following close behind! The ring is no longer on the table, but in your pocket.", ring);
+var weathertop = new location(1, "Weathertop", "A Black Rider has followed you! Don't put on the ring! Look behind the boulder for armor.","They sense that you're wearing the ring! You're now wearing the armor.", mithrilArmor);
+var rivendale = new location(2, "Rivendale", "The Council of Elrond is meeting, go! Discuss your future and take this gift.","At least Bilbo understands... Now you have the sword in your inventory.", stingSword);
+var minesMoria = new location(3, "Mines of Moria", "Doors of Durin: Speak friend, and enter. You've earned and orcs finger for entering.","Do you dare enter this treacherous tomb? Check your inventory- you have earned an orcs finger.", orcsFinger);
+var lothlorien = new location(4, "Elven Kingdom of Lothlorien","Ah! I think Lady Galadriel has a few gifts for you.","Can you speak Elvish? Are you sur you're worthy of these gifts?", lembasBread);
 var amonHen = new location(5, "Amon Hen","The ring is yours Frodo... do not be fooled by Boromir.","Leave! The orcs are coming- travel to Mordor at last!",null);
-var deadMarshes = new location(6, "Emyn Muil and Dead Marshes","Do you hear someone or someTHING behind you?","Sam, what's that?!", gollum);
+var deadMarshes = new location(6, "Emyn Muil and Dead Marshes","Do you hear someone or someTHING behind you? Take it hostage.","Sam, what's that in your inventory?!", gollum);
 var tower = new location(7, "Tower of Cirith Ungol","Follow Gollum up the steps of the tower...", "Watch out!", null);
-var mordor = new location(8, "Mordor","You're so close to Mount Doom... If only there was some nourishment.","Quick! Gollum is trying to steal the ring from you!", smallKnife);
-var mountDoom = new locatoin(9, "Mount Doom","The Eye of Sauron is watching you. Get Gollum out of the way!","You're finally free of the ring, Frodo!", friends);
+var mordor = new location(8, "Mordor","You're so close to Mount Doom... If only there was some nourishment. Take this last token for your final defense.","Quick! Gollum is trying to steal the ring from you! Use your knife from your inventory!", smallKnife);
+var mountDoom = new location(9, "Mount Doom","The Eye of Sauron is watching you. Get Gollum out of the way! Your friends are waiting for you to take them!","You're finally free of the ring, Frodo! Look, everyone is alive and well.", friends);
 
 var inventory = [null,null,null,null,null,null,null,null];
 
@@ -59,7 +59,7 @@ var map = [
 
 ];
 				// 0    1       2
-var locations = [theShire,waethertop,rivendale,minesMoria,lothlorien,amonHen,deadMarshes,tower,mordor,mountDoom];
+var locations = [theShire,weathertop,rivendale,minesMoria,lothlorien,amonHen,deadMarshes,tower,mordor,mountDoom];
 //direction to travel
 var direction = 0;
 //holds current location
@@ -84,7 +84,7 @@ function west(){
 
 function visitRoom(){
 	var site = locations[currentLocation];
-	var message = site.desc;
+	var message = site.name +": "+site.desc;
 
 	if(site.visited == false){
 		score +=5;
@@ -137,7 +137,7 @@ function displayInventory(){
 	var message = "Inventory list: \n";
 	for(var i = 0; i < inventory.length-1; i++) {
 		if(inventory[i] != null){
-			message+=inventory[i].name+"   "+inventory[i].desc + "\n";
+			message+=inventory[i].name+": "+inventory[i].desc + "\n";
 		}
 	}
 
