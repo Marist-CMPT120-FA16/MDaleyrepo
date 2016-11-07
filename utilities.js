@@ -22,13 +22,27 @@ function item(id, name, desc) {
 }
 
 //items
-var sturgeon = new item(0, "Sweet Sturgeon", "Wow, what a fresh fish.");
+var ring = new item(0, "Ring of Sauron", "I can feel it's power...");
+var mithril armor = new item(1, "Mithril Armor", "I feel invincible, thanks Bilbo.");
+var sting sword = new item(2, "Sting Sword", "This glows when orcs are nearby.");
+var orcs finger = new item(3, "Orcs Finger", "A trophy for enduring the pain.");
+var lembas bread = new item(4, "Lembas Bread", "Even the smallest bite can fill your stomach for days.");
+var gollum = new item(5, "Gollum", "How can you be sure he'll be true to you?");
+var faramir = new item(6, "Faramir", "")
 //locations
-var river = new location(0, "The River", "5. You're drowning in the river. But there is a sturgeon! Get out quick!","5. You're drowning in the river. No fish to be found just dirty needles :( Get out quick!", sturgeon);
-var hancock = new location(1, "Hancock", "u at hancock","5. You're drowning in the river. No fish to be found just dirty needles :( Get out quick!", null);
-var gym = new location(2, "Gym", "gym boizzut there is a sturgeon! Get out quick!","5. You're drowning in the river. No fish to be found just dirty needles :( Get out quick!", null);
+var the shire = new location(0, "The Shire", "5. Frodo- you must leave the shire immediately... The Black Riders are following close behind!","5. You must not wear the ring or they will see you!", Ring);
+var weathertop = new location(1, "Weathertop", "A Black Rider has followed you! Don't put on the ring!","They sense that you're wearing the ring!", Mithril Armor);
+var rivendale = new location(2, "Rivendale", "The Council of Elrond is meeting, go! Discuss your future.","At least Bilbo understands...", Sting Sword);
+var mines moria = new location(3, "Mines of Moria", "Doors of During: Speal friend, and enter."," Are you sure you want to enter this treacherous tomb?", Orcs Finger);
+var lothlorien = new location(4, "Elven Kingdom of Lothlorien","Ah! I think Lady Galadriel has a few gifts for you.","Can you speak Elvish? Are you sur eyo're worth of these gifts?",Lembas Bread);
+var amon hen = new location(5, "Amon Hen","The ring is yours Frodo... do not be fooled by Boromir.","Leave! The orcs are coming- travel to Mordor at last!",Small Ship);
+var emyn muil and dead marshes = new location(6, "Emyn Muil and Dead Marshes","Do you hear someone or someTHING behind you?","Sam, what's that?!", Gollum);
+var black gate = new location(7, "Black Gate","You cannot simply charge the gate. Head towards Ithilien.","You've been stopped in Gondor by Boromir's brother!", Faramir);
+var tower cirith ungol = new location(8, "Tower of Cirith Ungol","Follow Gollum up the steps of the tower...", "Watch out!", Giant Spider Shelob Web);
+var mordor = new location(9, "Mordor","You're so close to Mount Doom... If only there was some nourishment.","Quick! Gollum is trying to steal the ring from you!", Small Knife);
+var mount doom = new locatoin(10, "Mount Doom","The Eye of Sauron is watching you. Get Gollum out of the way!","You're finally free of the ring, Frodo!", Friends);
 
-var inventory = [null,null,null]
+var inventory = [null,null,null,null];
 
 var map = [
 				     //n  s  e  w 
@@ -111,6 +125,16 @@ function take(){
 
 }
 
+function displayInventory(){
+	var message = "Inventory list: \n";
+	for(var i = 0; i < inventory.length-1; i++) {
+		if(inventory[i] != null){
+			message+=inventory[i].name+"   "+inventory[i].desc + "\n";
+		}
+	}
+
+	writeText(message);
+}
  // Writes to the text area
 function writeText(msg) {
 	document.getElementById("display").value="\n"+msg+"\n Score: "+score+"\n"+document.getElementById("display").value;
