@@ -38,6 +38,9 @@
               onclick="west()"><br>
         <input type="text" name="command" id="command">
         <input type="button" value="Go"  onclick="interpretCommand(document.getElementById('command').value)"><br>
+        <input type="button" value="Inventory"  onclick="displayInventory()"><input type="button" value="Take"  onclick="take()">
+        <br>
+
         <a href="mailto:mdaley.hhs@gmail.com">Send Mail</a><br>
     </div>    
         <script>
@@ -84,6 +87,10 @@
             case('i' ):
             case('inventory'):
               displayInventory();
+            break;
+            case('h' ):
+            case('help'):
+              help();
             break;
 
             default:

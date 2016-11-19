@@ -1,4 +1,4 @@
-function location(id, name, desc, descAfter, item) {
+function locale(id, name, desc, descAfter, item) {
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
@@ -30,19 +30,21 @@ var lembasBread = new item(4, "Lembas Bread", "Even the smallest bite can fill y
 var gollum = new item(5, "Gollum", "How can you be sure he'll be true to you?");
 var smallKnife = new item(6, "Small Knife", "For anyone that gets in your way from now on...");
 var friends = new item(7, "Friends", "Alas Reunited with your loved ones!");
-//locations
-var theShire = new location(0, "The Shire", " Frodo- you must leave the shire immediately... The Black Riders are following close behind! Take The Ring on the table."," Frodo- you must leave the shire immediately... The Black Riders are following close behind! The ring is no longer on the table, but in your pocket.", ring);
-var weathertop = new location(1, "Weathertop", "A Black Rider has followed you! Don't put on the ring! Look behind the boulder for armor.","They sense that you're wearing the ring! You're now wearing the armor.", mithrilArmor);
-var rivendale = new location(2, "Rivendale", "The Council of Elrond is meeting, go! Discuss your future and take this gift.","At least Bilbo understands... Now you have the sword in your inventory.", stingSword);
-var minesMoria = new location(3, "Mines of Moria", "Doors of Durin: Speak friend, and enter. You've earned and orcs finger for entering.","Do you dare enter this treacherous tomb? Check your inventory- you have earned an orcs finger.", orcsFinger);
-var lothlorien = new location(4, "Elven Kingdom of Lothlorien","Ah! I think Lady Galadriel has a few gifts for you.","Can you speak Elvish? Are you sur you're worthy of these gifts?", lembasBread);
-var amonHen = new location(5, "Amon Hen","The ring is yours Frodo... do not be fooled by Boromir.","Leave! The orcs are coming- travel to Mordor at last!",null);
-var deadMarshes = new location(6, "Emyn Muil and Dead Marshes","Do you hear someone or someTHING behind you? Take it hostage.","Sam, what's that in your inventory?!", gollum);
-var tower = new location(7, "Tower of Cirith Ungol","Follow Gollum up the steps of the tower...", "Watch out!", null);
-var mordor = new location(8, "Mordor","You're so close to Mount Doom... If only there was some nourishment. Take this last token for your final defense.","Quick! Gollum is trying to steal the ring from you! Use your knife from your inventory!", smallKnife);
-var mountDoom = new location(9, "Mount Doom","The Eye of Sauron is watching you. Get Gollum out of the way! Your friends are waiting for you to take them!","You're finally free of the ring, Frodo! Look, everyone is alive and well.", friends);
+//locales
+var theShire = new locale(0, "The Shire", " Frodo- you must leave the shire immediately... The Black Riders are following close behind! Take The Ring on the table."," Frodo- you must leave the shire immediately... The Black Riders are following close behind! The ring is no longer on the table, but in your pocket.", ring);
+var weathertop = new locale(1, "Weathertop", "A Black Rider has followed you! Don't put on the ring! Look behind the boulder for armor.","They sense that you're wearing the ring! You're now wearing the armor.", mithrilArmor);
+var rivendale = new locale(2, "Rivendale", "The Council of Elrond is meeting, go! Discuss your future and take this gift.","At least Bilbo understands... Now you have the sword in your inventory.", stingSword);
+var minesMoria = new locale(3, "Mines of Moria", "Doors of Durin: Speak friend, and enter. You've earned and orcs finger for entering.","Do you dare enter this treacherous tomb? Check your inventory- you have earned an orcs finger.", orcsFinger);
+var lothlorien = new locale(4, "Elven Kingdom of Lothlorien","Ah! I think Lady Galadriel has a few gifts for you.","Can you speak Elvish? Are you sur you're worthy of these gifts?", lembasBread);
+var amonHen = new locale(5, "Amon Hen","The ring is yours Frodo... do not be fooled by Boromir.","Leave! The orcs are coming- travel to Mordor at last!",null);
+var deadMarshes = new locale(6, "Emyn Muil and Dead Marshes","Do you hear someone or someTHING behind you? Take it hostage.","Sam, what's that in your inventory?!", gollum);
+var tower = new locale(7, "Tower of Cirith Ungol","Follow Gollum up the steps of the tower...", "Watch out!", null);
+var mordor = new locale(8, "Mordor","You're so close to Mount Doom... If only there was some nourishment. Take this last token for your final defense.","Quick! Gollum is trying to steal the ring from you! Use your knife from your inventory!", smallKnife);
+var mountDoom = new locale(9, "Mount Doom","The Eye of Sauron is watching you. Get Gollum out of the way! Your friends are waiting for you to take them!","You're finally free of the ring, Frodo! Look, everyone is alive and well.", friends);
 
 var inventory = [null,null,null,null,null,null,null,null];
+
+var lastLocale = null;
 
 var map = [
 				          //n  s  e  w 
@@ -59,63 +61,69 @@ var map = [
 
 ];
 				// 0    1       2
-var locations = [theShire,weathertop,rivendale,minesMoria,lothlorien,amonHen,deadMarshes,tower,mordor,mountDoom];
+var locales = [theShire,weathertop,rivendale,minesMoria,lothlorien,amonHen,deadMarshes,tower,mordor,mountDoom];
 //direction to travel
 var direction = 0;
-//holds current location
-var currentLocation = 0;
+//holds current locale
+var currentlocale = 0;
 
 function north(){
-	currentLocation = map[currentLocation][0];
+	currentlocale = map[currentlocale][0];
 	visitRoom();
 }
 function south(){
-	currentLocation = map[currentLocation][1];
+	currentlocale = map[currentlocale][1];
 	visitRoom();
 }
 function east(){
-	currentLocation = map[currentLocation][2];
+	currentlocale = map[currentlocale][2];
 	visitRoom();
 }
 function west(){
-	currentLocation = map[currentLocation][3];
+	currentlocale = map[currentlocale][3];
 	visitRoom();
 }
 
 function visitRoom(){
-	var site = locations[currentLocation];
-	var message = site.name +": "+site.desc;
+	var site = locales[currentlocale];
+	var message =null;
+
+	if(site == lastLocale){
+		message = "You can't move that way, Frodo!";
+	}else{
+		message = site.name +": "+site.desc;
+	}
 
 	if(site.visited == false){
 		score +=5;
 		site.visited = true;
 	}
-
 	//button disable code :)
 	document.getElementById('north').disabled = false;
     document.getElementById('east').disabled = false;
     document.getElementById('south').disabled = false;
     document.getElementById('west').disabled = false;
 
-	if(site.id == map[currentLocation][0]){
+	if(site.id == map[currentlocale][0]){
 		document.getElementById('north').disabled = true;
 	}
-	if(site.id == map[currentLocation][1]){
+	if(site.id == map[currentlocale][1]){
 		document.getElementById('south').disabled = true;
 	}
-	if(site.id == map[currentLocation][2]){
+	if(site.id == map[currentlocale][2]){
 		document.getElementById('east').disabled = true;
 	}
-	if(site.id == map[currentLocation][3]){
+	if(site.id == map[currentlocale][3]){
 		document.getElementById('west').disabled = true;
 	}
 
 	writeText(message);
+	lastLocale = site;
 }
 
 function take(){
-	//get our current location
-	var site = locations[currentLocation];
+	//get our current locale
+	var site = locales[currentlocale];
 	//if theres no item, tell the player!
 	if(site.item == null){
 		writeText("There's no item to take Frodo!");
@@ -124,7 +132,7 @@ function take(){
 		var item = site.item;
 		//add item to inventory
 		inventory[item.id]=item;
-		//remove item from location
+		//remove item from locale
 		site.item=null;
 		//change site description to reflect the item is gone!
 		site.desc=site.descAfter;
@@ -140,6 +148,12 @@ function displayInventory(){
 			message+=inventory[i].name+": "+inventory[i].desc + "\n";
 		}
 	}
+
+	writeText(message);
+}
+function help(){
+	var message = "N or North: To go North \n S or South: To go North \n E or East: To go East \n W or West: To go West \n T or Take: To take an object \n I or Inventory: To check inventory list";
+	
 
 	writeText(message);
 }
