@@ -64,20 +64,16 @@ var direction = 0;
 var currentlocale = 0;
 
 function north(){
-	currentlocale = map[currentlocale][0];
-	visitRoom();
+	y-=1;
 }
 function south(){
-	currentlocale = map[currentlocale][1];
-	visitRoom();
+	y+=1;
 }
 function east(){
-	currentlocale = map[currentlocale][2];
-	visitRoom();
+	x+=1;
 }
 function west(){
-	currentlocale = map[currentlocale][3];
-	visitRoom();
+	x-=1;
 }
 
 function visitRoom(){
