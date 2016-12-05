@@ -46,20 +46,13 @@ var inventory = [null,null,null,null,null,null,null,null];
 
 var lastLocale = null;
 
-var map = [
-				          //n  s  e  w 
-/*loc0 aka the shire*/    [0, 0, 1, 0],
-/*loc1 aka weathertop*/   [1, 1, 2, 0],
-/*loc2 aka rivendale*/    [2, 3, 2, 1],
-/*loc3 aka mines moria*/  [2, 3, 4, 3],
-/*loc4 aka lothlorien*/   [4, 5, 6, 4],
-/*loc5 aka amon hen*/     [4, 5, 6, 5],
-/*loc6 aka dead marshes*/ [6, 6, 7, 4],
-/*loc7 aka tower*/        [7, 8, 7, 6],
-/*loc8 aka mordor*/       [7, 8, 8, 9],
-/*loc9 aka mount doom*/   [9, 9, 8, 9]
+	var map=[			[ 0, 1, 2,-1,-1,-1,-1],
+						[-1,-1, 3, 4, 6, 7,-1],
+					    [-1,-1,-1, 5,-1, 8,-1],
+					    [-1,-1,-1,-1,-1, 9,-1] 
 
-];
+			];
+					    						
 				// 0    1       2
 var locales = [theShire,weathertop,rivendale,minesMoria,lothlorien,amonHen,deadMarshes,tower,mordor,mountDoom];
 //direction to travel
