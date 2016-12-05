@@ -111,16 +111,16 @@ function visitRoom(){
     document.getElementById('south').disabled = false;
     document.getElementById('west').disabled = false;
 
-	if(map[x][y-1]== -1){
+	if(map[y-1][x] == -1){
 		document.getElementById('north').disabled = true;
 	}
-	if(map[x][y+1]== -1){
+	if(map[y+1][x] == -1){
 		document.getElementById('south').disabled = true;
 	}
-	if(map[x+1][y]== -1){
+	if(map[y][x+1] == -1){
 		document.getElementById('east').disabled = true;
 	}
-	if(map[x-1][y]== -1){
+	if(map[y][x-1] == -1){
 		document.getElementById('west').disabled = true;
 	}
 
