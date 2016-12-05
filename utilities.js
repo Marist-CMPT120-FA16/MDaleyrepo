@@ -46,6 +46,9 @@ var inventory = [null,null,null,null,null,null,null,null];
 
 var lastLocale = null;
 
+	var x = 0;
+	var y = 0;
+
 	var map=[			[ 0, 1, 2,-1,-1,-1,-1],
 						[-1,-1, 3, 4, 6, 7,-1],
 					    [-1,-1,-1, 5,-1, 8,-1],
