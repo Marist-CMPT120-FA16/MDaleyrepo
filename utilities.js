@@ -46,13 +46,15 @@ var inventory = [null,null,null,null,null,null,null,null];
 
 var lastLocale = null;
 
-	var x = 0;
-	var y = 0;
+	var x = 1;
+	var y = 1;
 
-	var map=[			[ 0, 1, 2,-1,-1,-1,-1],
-						[-1,-1, 3, 4, 6, 7,-1],
-					    [-1,-1,-1, 5,-1, 8,-1],
-					    [-1,-1,-1,-1,-1, 9,-1] 
+	var map=[			[-1,-1,-1, -1,-1,-1,-1,-1],
+						[-1,  0, 1, 2,-1,-1,-1,-1],
+						[-1, -1,-1, 3, 4, 6, 7,-1],
+					    [-1, -1,-1,-1, 5,-1, 8,-1],
+					    [-1, -1,-1,-1,-1,-1, 9,-1],
+					    [-1, -1,-1,-1,-1,-1, -1,-1]
 
 			];
 					    						
@@ -64,19 +66,27 @@ var direction = 0;
 var currentlocale = 0;
 
 function north(){
-	y-=1;
+	if(map[y-1][x] != -1){
+		y-=1;
+	}
 	visitRoom();
 }
 function south(){
-	y+=1;
+	if(map[y+1][x] != -1){
+		y+=1;
+	}
 	visitRoom();
 }
 function east(){
-	x+=1;
+	if(map[y][x+1] != -1){
+		x+=1;
+	}
 	visitRoom();
 }
 function west(){
-	x-=1;
+	if(map[y][x-1] != -1){
+		x-=1;
+	}
 	visitRoom();
 }
 
@@ -101,16 +111,16 @@ function visitRoom(){
     document.getElementById('south').disabled = false;
     document.getElementById('west').disabled = false;
 
-	if(map[x][y-1]== -1 || typeof mup[x][y-1] === 'undefined'){
+	if(map[x][y-1]== -1){
 		document.getElementById('north').disabled = true;
 	}
-	if(site.id == map[currentlocale][1]){
+	if(map[x][y+1]== -1){
 		document.getElementById('south').disabled = true;
 	}
-	if(site.id == map[currentlocale][2]){
+	if(map[x+1][y]== -1){
 		document.getElementById('east').disabled = true;
 	}
-	if(site.id == map[currentlocale][3]){
+	if(map[x-1][y]== -1){
 		document.getElementById('west').disabled = true;
 	}
 
