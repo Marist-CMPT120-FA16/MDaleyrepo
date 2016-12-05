@@ -65,18 +65,23 @@ var currentlocale = 0;
 
 function north(){
 	y-=1;
+	visitRoom();
 }
 function south(){
 	y+=1;
+	visitRoom();
 }
 function east(){
 	x+=1;
+	visitRoom();
 }
 function west(){
 	x-=1;
+	visitRoom();
 }
 
 function visitRoom(){
+	currentlocale=map[y][x];
 	var site = locales[currentlocale];
 	var message =null;
 
@@ -96,7 +101,7 @@ function visitRoom(){
     document.getElementById('south').disabled = false;
     document.getElementById('west').disabled = false;
 
-	if(site.id == map[currentlocale][0]){
+	if(map[x][y-1]== -1 || typeof mup[x][y-1] === 'undefined'){
 		document.getElementById('north').disabled = true;
 	}
 	if(site.id == map[currentlocale][1]){
