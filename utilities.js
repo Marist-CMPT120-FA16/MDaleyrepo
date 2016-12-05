@@ -72,8 +72,27 @@ function north(){
 	visitRoom();
 }
 function south(){
-	if(map[y+1][x] != -1){
+	if(map[y+1][x] != -1 && (map[y+1][x] != 9)){
 		y+=1;
+	}
+	else if(map[y+1][x] == 9){
+
+		//check to make sure they have all items except friends
+		if(inventory[0] != null && inventory[1] != null && inventory[2] != null && inventory[3] != null && inventory[4] != null && inventory[5] != null && inventory[6] != null){
+			y+=1;
+		}
+		else{
+			writeText("You can't face Gollum at Mt Doom without all your items, return to the other locations to find them!");
+		}
+	}
+	else if(map[y+1][x] == 3){
+		//check to make sure they have all items except friends
+		if(inventory[1] != null){
+			y+=1;
+		}
+		else{
+			writeText("You can't go into the Mines of Moria without armor. Go back and find it!");
+		}
 	}
 	visitRoom();
 }
