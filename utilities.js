@@ -72,7 +72,7 @@ function north(){
 	visitRoom();
 }
 function south(){
-	if(map[y+1][x] != -1 && (map[y+1][x] != 9)){
+	if(map[y+1][x] != -1 && map[y+1][x] != 9 && map[y+1][x] != 3){
 		y+=1;
 	}
 	else if(map[y+1][x] == 9){
@@ -110,41 +110,46 @@ function west(){
 }
 
 function visitRoom(){
-	currentlocale=map[y][x];
-	var site = locales[currentlocale];
-	var message =null;
+	if(inventory[7]== null){
+		currentlocale=map[y][x];
+		var site = locales[currentlocale];
+		var message =null;
 
-	if(site == lastLocale){
-		message = "You can't move that way, Frodo!";
-	}else{
-		message = site.name +": "+site.desc;
-	}
+		if(site == lastLocale){
+			message = "You can't move that way, Frodo!";
+		}else{
+			message = site.name +": "+site.desc;
+		}
 
-	if(site.visited == false){
-		score +=5;
-		site.visited = true;
-	}
-	//button disable code :)
-	document.getElementById('north').disabled = false;
-    document.getElementById('east').disabled = false;
-    document.getElementById('south').disabled = false;
-    document.getElementById('west').disabled = false;
+		if(site.visited == false){
+			score +=5;
+			site.visited = true;
+		}
+		//button disable code :)
+		document.getElementById('north').disabled = false;
+	    document.getElementById('east').disabled = false;
+	    document.getElementById('south').disabled = false;
+	    document.getElementById('west').disabled = false;
 
-	if(map[y-1][x] == -1){
-		document.getElementById('north').disabled = true;
-	}
-	if(map[y+1][x] == -1){
-		document.getElementById('south').disabled = true;
-	}
-	if(map[y][x+1] == -1){
-		document.getElementById('east').disabled = true;
-	}
-	if(map[y][x-1] == -1){
-		document.getElementById('west').disabled = true;
-	}
+		if(map[y-1][x] == -1){
+			document.getElementById('north').disabled = true;
+		}
+		if(map[y+1][x] == -1){
+			document.getElementById('south').disabled = true;
+		}
+		if(map[y][x+1] == -1){
+			document.getElementById('east').disabled = true;
+		}
+		if(map[y][x-1] == -1){
+			document.getElementById('west').disabled = true;
+		}
 
-	writeText(message);
-	lastLocale = site;
+		writeText(message);
+		lastLocale = site;
+	}
+	else{
+	    endgame();
+	}
 }
 
 function take(){
@@ -153,6 +158,9 @@ function take(){
 	//if theres no item, tell the player!
 	if(site.item == null){
 		writeText("There's no item to take Frodo!");
+	}
+	else if(site.item==friends){
+		endgame();
 	}
 	else{
 		var item = site.item;
@@ -186,4 +194,13 @@ function help(){
  // Writes to the text area
 function writeText(msg) {
 	document.getElementById("display").value="\n"+msg+"\n Score: "+score+"\n"+document.getElementById("display").value;
+ }
+
+  // Writes to the text area
+function endgame() {
+	document.getElementById('north').disabled = true;
+	document.getElementById('east').disabled = true;
+	document.getElementById('south').disabled = true;
+	document.getElementById('west').disabled = true;
+	document.getElementById("display").value="YOU WIN! \nYou got your friends back and completed your journey. You head back to the shire and live a long life! Your Score: "+score+"\n";
  }
